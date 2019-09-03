@@ -12,9 +12,9 @@ import java.util.UUID;
 @RestController
 public class PersonController {
     private final PersonService personService;
+
     @Autowired
     public PersonController(PersonService personService){
-
         this.personService = personService;
     }
 
@@ -27,7 +27,6 @@ public class PersonController {
     public List<Person> getAllPeople(){
         return personService.getAllPeople();
     }
-
     public Person getPersonById(UUID id){
         return personService.getPersonById(id)
                 .orElse(null);
