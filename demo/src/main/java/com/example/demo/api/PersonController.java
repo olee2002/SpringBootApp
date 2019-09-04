@@ -25,10 +25,22 @@ public class PersonController {
 
     @GetMapping
     public List<Person> getAllPeople(){
+
         return personService.getAllPeople();
     }
-    public Person getPersonById(UUID id){
+    @GetMapping(path = "{id}")
+    public Person getPersonById(@PathVariable("id") UUID id){
         return personService.getPersonById(id)
                 .orElse(null);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void deletePersonById(@PathVariable("id") UUID id){
+        personService.deletePerson(id);
+    }
+
+    @PutMapping(path = "{id}")
+    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate){
+        personService.updatePerson(id, personToUpdate);
     }
 }
