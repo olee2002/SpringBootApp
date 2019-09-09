@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Person;
+import com.example.demo.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,30 +9,30 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository("fakeDao")
-public class FakePersonDataAccessService implements PersonDao {
+public class FakeUserDataAccessService implements UserDao {
 
-    private static List<Person> DB = new ArrayList<>();
+    private static List<User> DB = new ArrayList<>();
 
     @Override
-    public int insertPerson(UUID id, Person person) {
-        DB.add(new Person(id, person.getName()));
+    public int insertPerson(UUID id, User user) {
+        DB.add(new User(id, user.getUsername(), user.getPassword()));
         return 1;
     }
     @Override
-    public List<Person> selectAllPeople(){
+    public List<User> selectAllPeople(){
         return DB;
     }
 
     @Override
-    public Optional<Person> selectPersonById(UUID id) {
+    public Optional<User> selectPersonById(UUID id) {
         return DB.stream()
-                .filter(person-> person.getId().equals(id))
+                .filter(user -> user.getId().equals(id))
                 .findFirst();
     }
 
     @Override
     public int deletePersonById(UUID id) {
-        Optional<Person> personMaybe = selectPersonById(id);
+        Optional<User> personMaybe = selectPersonById(id);
         if(personMaybe.isEmpty()){
             return 0;
         }
@@ -41,12 +41,12 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public int updatePersonById(UUID id, Person person) {
+    public int updatePersonById(UUID id, User user) {
         return selectPersonById(id)
                 .map(p->{
-                    int indexOfPersonToDelete = DB.indexOf(person);
+                    int indexOfPersonToDelete = DB.indexOf(user);
                     if(indexOfPersonToDelete >= 0) {
-                        DB.set(indexOfPersonToDelete, person);
+                        DB.set(indexOfPersonToDelete, user);
                         return 1;
                     }
                     return 0;
