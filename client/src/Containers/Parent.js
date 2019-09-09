@@ -9,9 +9,7 @@ export default class Parent extends Component {
     }
 
 
-    handleChange = (event, key) =>{
-        this.setState({[key]: event.target.value})
-    }
+    handleChange = (event, key) =>this.setState({[key]: event.target.value})
 
 
     render() {
