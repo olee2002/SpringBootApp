@@ -9,16 +9,14 @@ export default class Parent extends Component {
     }
 
 
-    handleChange = event =>{
-        this.setState({input: event.target.value}, ()=>{
-            console.log('test input', this.state.input)
-        })
+    handleChange = (event, key) =>{
+        this.setState({[key]: event.target.value})
     }
 
 
     render() {
         return (
-            <div>
+            <div className='flex'>
                 <Child handleChange={this.handleChange} input = {this.state.input}/>
             </div>
         )
