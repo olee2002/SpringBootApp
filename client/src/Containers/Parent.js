@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 import Child from '../Components/Child'
+import { api } from '../Data/data'
+
+console.log('api', api)
 
 export default class Parent extends Component {
 
@@ -14,7 +17,7 @@ export default class Parent extends Component {
 
     render() {
         return (
-            <div className='flex'>
+            <div className='app flex'>
                 <Child handleChange={this.handleChange} input = {this.state.input}/>
             </div>
         )

@@ -1,11 +1,19 @@
 .App {
   text-align: center;
-  background: white;
+  background: #D3D3D3;
 }
 
 .flex {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 10%;
