@@ -9,15 +9,32 @@ spec:
       labels:
         app: react-spring-app
     spec:
+      volumes:
+        -name:spanner-creds
+        secret:
+          secretname: google-secret.json
       containers:
         - name: react-spring-app  #Your app will be the running container you built
-          image: gcr.io/react-spring-app-252019/my-spring-app
-          imagePullPolicy: Always
+          image: gcr.io/react-spring-app-252019/spring-api:v1
+          ports:
+          - containerPort: 8080
+            name: app
+      env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/app-secrets/google-secret.json
 
+FILE
+      volumeMounts:
+        - name: spanner-creds
+          mountPath: /secrets/app-secrets
+          readOnly: true
+      imagePullPolicy: Always
+    
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: react-spring-app   #This will be the name of your load balancer
+  name: react-spring-app  #This will be the name of your load balancer
   namespace: default
 spec:
   selector:

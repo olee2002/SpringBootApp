@@ -3,54 +3,84 @@ package com.example.demo.dao;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
-@Repository("fakeDao")
+import com.google.cloud.spanner.*;
+
+
+@Repository
 public class FakeUserDataAccessService implements UserDao {
 
     private static List<User> DB = new ArrayList<>();
+    public static Boolean found;
+    Spanner spanner = createSpannerService();
+    DatabaseClient dbClient = createDbClient(spanner);
+    DatabaseAdminClient dbAdminClient = spanner.getDatabaseAdminClient();
+
+    private Spanner createSpannerService() {
+        SpannerOptions options = SpannerOptions.newBuilder()
+                .build();
+        Spanner spanner = options.getService();
+        return spanner;
+    }
+
+
+    private DatabaseClient createDbClient(Spanner spanner) {
+        SpannerOptions options = spanner.getOptions();
+        String instance = "spanner-instance";
+        String database = "spanner-db";
+
+        // Creates a database client
+        DatabaseClient dbClient = spanner.getDatabaseClient(DatabaseId.of(options.getProjectId(), instance, database));
+
+        return dbClient;
+    }
+
+
+    static void createAUser(DatabaseClient dbClient, Integer id, String username, String password) {
+        dbClient.readWriteTransaction()
+                .run(new TransactionRunner.TransactionCallable<Void>() {
+                    @Override
+                    public Void run(TransactionContext transaction) throws Exception {
+                        transaction.buffer(Mutation.newInsertBuilder("users")
+                                .set("id")
+                                .to(id)
+                                .set("username")
+                                .to(username)
+                                .set("password")
+                                .to(password)
+                                .build());
+                        return null;
+                    }
+                });
+    }
+
 
     @Override
-    public int insertPerson(UUID id, User user) {
+    public int insertPerson(Integer id, User user) {
+        System.out.print(user);
+        createAUser(dbClient, id, user.getUsername(), user.getPassword());
+        //saving this for testing
         DB.add(new User(id, user.getUsername(), user.getPassword()));
         return 1;
     }
-    @Override
-    public List<User> selectAllPeople(){
-        return DB;
-    }
 
     @Override
-    public Optional<User> selectPersonById(UUID id) {
-        return DB.stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst();
-    }
-
-    @Override
-    public int deletePersonById(UUID id) {
-        Optional<User> personMaybe = selectPersonById(id);
-        if(personMaybe.isEmpty()){
-            return 0;
+    public Boolean selectPersonByUsername(User user) {
+        try (ResultSet resultSet = dbClient
+                .singleUse() // Execute a single read or query against Cloud Spanner.
+                .executeQuery(Statement.of("SELECT * FROM users WHERE username='"+user.getUsername()+"'"))) {
+            while (resultSet.next()) {
+                if(resultSet.getString("username").equals(user.getUsername())){
+                    System.out.println("Found!");
+                    found=true;
+                } else {
+                    System.out.println("Not Found!");
+                    found=false;
+                }
+            }
         }
-        DB.remove(personMaybe.get());
-        return 1;
+        return found;
     }
-
-    @Override
-    public int updatePersonById(UUID id, User user) {
-        return selectPersonById(id)
-                .map(p->{
-                    int indexOfPersonToDelete = DB.indexOf(user);
-                    if(indexOfPersonToDelete >= 0) {
-                        DB.set(indexOfPersonToDelete, user);
-                        return 1;
-                    }
-                    return 0;
-                })
-                .orElse(0);
-    }
+;
 }

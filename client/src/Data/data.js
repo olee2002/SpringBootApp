@@ -1,10 +1,13 @@
 import Axios from 'axios'
 
-const host = '/http://5000/api/v1/users'
+const host = 'http://localhost:8080/api/v1/users'
 
 export const api = {
     getUsers(){
         return Axios.get(host)
+    },
+    getUserByUsername(user){
+        return Axios.put(host, user)
     },
     postAUser(user){
         return Axios.post(host, user)

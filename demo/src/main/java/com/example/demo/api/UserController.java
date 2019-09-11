@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins="*")
 @RequestMapping("api/v1/users")
 @RestController
 public class UserController {
@@ -23,23 +24,8 @@ public class UserController {
         userService.addPerson(user);
     }
 
-    @GetMapping
-    public List<User> getAllPeople(){
-        return userService.getAllPeople();
-    }
-    @GetMapping(path = "{id}")
-    public User getPersonById(@PathVariable("id") UUID id){
-        return userService.getPersonById(id)
-                .orElse(null);
-    }
-
-    @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") UUID id){
-        userService.deletePerson(id);
-    }
-
-    @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @RequestBody User userToUpdate){
-        userService.updatePerson(id, userToUpdate);
+    @PutMapping
+    public Boolean getPersonByUsername(@RequestBody User user){
+        return userService.getPersonByUsername(user);
     }
 }
