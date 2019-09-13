@@ -1,7 +1,7 @@
 # DeployADockerContainerToK8s
 describe the process of deploying a docker container to kubenets
 
-## GCloud Initial 
+## GCloud Init 
 Create an google cloud account with a $300 credit. 
 - create a project (Project-ID will be important and will be mentioned below.)
 - create a cluster ( run connect script in the console)
