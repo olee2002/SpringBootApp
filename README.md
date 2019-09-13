@@ -41,6 +41,27 @@ COPY build/libs/demo-0.0.1-app.jar /app.jar //(copy local app.jar file to docker
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "/app.jar"] //tell docker which file to exec.
 ```
+see running containers in CLI (all containers - docker ps -a)
+```
+docker ps
+```
+delete docker containers
+```
+docker rm containerId
+```
+start or stop docker containers
+```
+docker start/stop containerId
+```
+see docker images
+```
+docker images
+```
+delete docker images
+```
+docker rmi imageId
+```
+
 Incase you need to get rid of docker images and containers (but use this carefully!)
 ```
 docker system prune -a
