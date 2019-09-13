@@ -28,6 +28,7 @@ gcloud container clusters get-credentials react-spring-app --zone us-central1-a 
 now gcloud CLI is set up!
 
 ## Docker
+install docker CLI
 ```
 gradle build
 ```
