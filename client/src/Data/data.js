@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const host = 'http://localhost:8080/api/v1/users'
+const host = 'http://104.197.198.135/api/v1/users'
 
 export const api = {
     getUsers(){

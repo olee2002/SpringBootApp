@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
-COPY build/libs/demo-0.0.1-SNAPSHOT.jar /app.jar
+FROM openjdk:8-jdk
+COPY build/libs/login-app-spring-boot-0.1.0.jar /app1.jar
 EXPOSE 8080
-ENTRYPOINT [ "java", "-jar", "/app.jar"]
+ENTRYPOINT [ "java", "-jar", "/app1.jar"]
