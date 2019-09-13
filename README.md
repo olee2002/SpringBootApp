@@ -40,6 +40,10 @@ COPY build/libs/demo-0.0.1-app.jar /app.jar //(copy local app.jar file to docker
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "/app.jar"] //tell docker which file to exec.
 ```
+Incase you need to get rid of docker images and containers
+```
+docker system prune -a
+```
 
 ## Connect Local Docker to Cloud 
 
@@ -75,6 +79,11 @@ kubectl apply -f ./deployment.yml
 ```
 kubectl port-forward react-spring-two-86d56bff9d-prfpp 8080
 ```
+in case, you need to reset kubectl
+```
+killall kubectl
+```
+
 Check the external IP address in GCloud console and should be able to access to the app at this point.
 
 reference:
