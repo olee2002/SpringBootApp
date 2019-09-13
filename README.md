@@ -34,13 +34,22 @@ gradle build
 ```
 build file is ready (app.jar)
 
-Create docker file to the root directory (example below)
+Create docker file to the root directory (examples below)
 ```
 FROM openjdk:8-jdk // this will pull image from docker hub (takes some time to download)
 COPY build/libs/demo-0.0.1-app.jar /app.jar //(copy local app.jar file to docker container)
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "/app.jar"] //tell docker which file to exec.
 ```
+```
+FROM openjdk:8
+ENV PORT=8080
+EXPOSE 8080
+COPY ./build/libs/*.jar /app.jar
+CMD exec java ${JAVA_USER_OPTS} -jar /app.jar
+```
+
+
 see running containers in CLI (all containers - docker ps -a)
 ```
 docker ps
