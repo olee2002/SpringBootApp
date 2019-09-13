@@ -67,7 +67,7 @@ Incase you need to get rid of docker images and containers (but use this careful
 docker system prune -a
 ```
 
-## Connect Local Docker to Cloud 
+## Connect Local Docker to Cloud Repository
 
 "docker build" will grab the local docker file & "-t" will tag and create an image in the cloud repository with the name provided.
 
