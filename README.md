@@ -1,5 +1,5 @@
 # DeployADockerContainerToK8s
-describe the process of deploying a docker container to kubenets
+describe the process of deploying a docker container to kubenets. Note: the order of each step is important!
 
 ## GCloud Init 
 Create an google cloud account with a $300 credit. 
