@@ -4,7 +4,7 @@ describe the process of deploying a docker container to kubenets. Note: the orde
 Ingress(DNS)/Service(IP address)/Deploy/Pod/Container relationships.
 https://www.figma.com/file/1ACJR3D3jvOFs205NTjIK6/Untitled?node-id=0%3A1
 
-Once a locally created container per a docker images is deployed to k8s, k8s created a pod as a deployment.
+Summary: Once a locally created container per a docker images is deployed to k8s, k8s created a pod as a deployment.
 A service is created with an ip address(load-balancer) by exposing the deployment.
 Eventually DNS can be assigned to the service. As a new deployment is being created due to a version update by running another dockerbuild image with a tag (:tag-ex. :v1), the deployment and service will need to be re-created. 
 
