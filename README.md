@@ -2,7 +2,7 @@
 describe the process of deploying a docker container to kubenets. Note: the order of each step is important!
 
 Ingress(DNS)/Service(IP address)/Deploy/Pod/Container relationships.
-https://www.figma.com/file/1ACJR3D3jvOFs205NTjIK6/Untitled?node-id=0%3A1
+https://www.figma.com/file/1ACJR3D3jvOFs205NTjIK6/K8s-Deployment-relationship?node-id=0%3A1
 
 Summary: Once a locally created container per a docker images is deployed to k8s, k8s created a pod as a deployment.
 A service is created with an ip address(load-balancer) by exposing the deployment.
