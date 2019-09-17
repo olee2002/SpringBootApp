@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Child from '../Components/Child'
+import SignInPage from '../Components/SignInPage'
 import { api } from '../Data/data'
 
 
@@ -43,7 +43,7 @@ export default class Parent extends Component {
     render() {
         return (
             <div className='app flex'>
-                <Child 
+                <SignInPage
                 handleChange={this.handleChange} 
                 handleSubmit={this.handleSubmit}
                 handleLogIn={this.handleLogIn}

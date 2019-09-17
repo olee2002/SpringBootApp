@@ -1,17 +1,17 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.UUID;
 
 
 public class Person {
     private final UUID id;
-    private final String name;
+    private final String username;
+    private final String password;
 
-    public Person(UUID id, String name){
+    public Person(UUID id, String username, String password){
         this.id= id;
-        this.name = name;
+        this.username = username;
+        this.password = password;
     }
 
 
@@ -20,7 +20,11 @@ public class Person {
     }
 
     public String getName() {
-        return name;
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
 }

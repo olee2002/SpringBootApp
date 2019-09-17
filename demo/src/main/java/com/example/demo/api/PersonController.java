@@ -13,7 +13,6 @@ import java.util.UUID;
 @RestController
 public class PersonController {
     private final PersonService personService;
-
     @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
@@ -28,8 +27,6 @@ public class PersonController {
         return personService.getPersonById(id)
                 .orElse(null);
     }
-
-
     @GetMapping
     public List<Person> getAllPeople(){
         System.out.println("Welcome to the backend api of O'lee's spring app!");
@@ -40,7 +37,6 @@ public class PersonController {
         personService.deletePerson(id);
         return personService.getAllPeople();
     }
-
     @PutMapping(path="{id}")
     public List<Person> updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate){
         personService.updatePerson(id, personToUpdate);
