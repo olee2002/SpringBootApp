@@ -3,18 +3,18 @@ import React, { Component } from 'react'
 export default class Child extends Component {
     render() {
 
-        const { handleChange, handleSubmit, handleLogIn, loggedIn, created } = this.props
+        const { handleChange, handleSubmit, loggedIn, created } = this.props
 
         return (
             !loggedIn ?
             <>
             <div className='card' style={{boxShadow:'3px 3px 2px #8d8d8d'}}>
-            <h5 class="m-3 flex-col">Please Log In to proceed!</h5>
+            <h5 class="m-3 flex-col">Enter your information to register!</h5>
             <div>
-                <small class="m-3">User Name</small>
+                <small class="m-3">Username</small>
                 <input 
                 type="text" 
-                class="form-control m-3" 
+                className="form-control m-3" 
                 placeholder="Username" 
                 style={{width: '30vw'}}
                 onChange = {e => handleChange(e, 'username')}
@@ -26,7 +26,7 @@ export default class Child extends Component {
                 <small class="m-3">Password</small>
                 <input 
                 type="password" 
-                class="form-control m-3" 
+                className="form-control m-3" 
                 placeholder="Password" 
                 style={{width: '30vw'}}
                 onChange = {e => handleChange(e, 'password')}
@@ -39,10 +39,6 @@ export default class Child extends Component {
             className='btn btn-primary m-3'
             onClick={()=>handleSubmit()}
             >{!created ? "Create":"Created!"}</button>
-            <button 
-            className='btn btn-primary m-3'
-            onClick={()=>handleLogIn()}
-            >{!loggedIn ? "Sign-In" : "You are signed in"}</button>
             </div>
             </div> 
             </>

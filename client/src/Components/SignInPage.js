@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
+import { Link } from 'react-router-dom'
+
 export default class Child extends Component {
     render() {
 
-        const { handleChange, handleSubmit, handleLogIn, loggedIn, username } = this.props
+        const { handleChange, sendToSignUp, handleLogIn, loggedIn, username } = this.props
 
         return (
             !loggedIn ?
@@ -11,10 +13,10 @@ export default class Child extends Component {
             <div className='card' style={{boxShadow:'3px 3px 2px #8d8d8d'}}>
             <h5 class="m-3 flex-col">Please Log In to proceed!</h5>
             <div>
-                <small class="m-3">User Name</small>
+                <small class="m-3">Username</small>
                 <input 
                 type="text" 
-                class="form-control m-3" 
+                className="form-control m-3" 
                 placeholder="Username" 
                 style={{width: '30vw'}}
                 onChange = {e => handleChange(e, 'username')}
@@ -26,7 +28,7 @@ export default class Child extends Component {
                 <small class="m-3">Password</small>
                 <input 
                 type="password" 
-                class="form-control m-3" 
+                className="form-control m-3" 
                 placeholder="Password" 
                 style={{width: '30vw'}}
                 onChange = {e => handleChange(e, 'password')}
@@ -35,14 +37,14 @@ export default class Child extends Component {
                 />
             </div>
             <div className='flex'>
-            <button 
-            className='btn btn-primary m-3'
-            onClick={()=>handleSubmit()}
-            >Sign-Up</button>
-            <button 
-            className='btn btn-primary m-3'
-            onClick={()=>handleLogIn()}
-            >{!loggedIn ? "Sign-In" : "You are signed in"}</button>
+                <button 
+                className='btn btn-primary m-3'
+                onClick={sendToSignUp}
+                >Sign-Up</button>
+                <button 
+                className='btn btn-primary m-3'
+                onClick={()=>handleLogIn()}
+                >{!loggedIn ? "Sign-In" : "You are signed in"}</button>
             </div>
             </div> 
             </>

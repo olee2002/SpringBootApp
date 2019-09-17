@@ -3,10 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.Person;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Repository("fakeDao")
 public class FakePersonDataAccess implements PersonDao {
@@ -28,15 +25,15 @@ public class FakePersonDataAccess implements PersonDao {
     public Optional<Person> selectPersonById(UUID id) {
         return DB
                 .stream()
-                .filter(person->person.getId().equals(id))
+                .filter(person -> person.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public Optional<Person> selectPersonByUsername(String username) {
+    public Optional<Person> selectPersonByUsername(String username, String password) {
         return DB
                 .stream()
-                .filter(person->person.getUsername().equals(username))
+                .filter(person -> person.getUsername().equals(username))
                 .findFirst();
     }
 
@@ -44,7 +41,7 @@ public class FakePersonDataAccess implements PersonDao {
     @Override
     public int deletePersonById(UUID id) {
         Optional<Person> personMaybe = selectPersonById(id);
-        if(personMaybe.isPresent()){
+        if (personMaybe.isPresent()) {
             DB.remove(personMaybe.get());
             return 1;
         } else {
@@ -58,26 +55,31 @@ public class FakePersonDataAccess implements PersonDao {
                 .map(p -> {
                     int indexOfPersonToUpdate = DB.indexOf(p);
                     System.out.printf("Index", indexOfPersonToUpdate);
-                    if(indexOfPersonToUpdate >= 0){
+                    if (indexOfPersonToUpdate >= 0) {
                         DB.set(indexOfPersonToUpdate, new Person(id, person.getUsername(), person.getPassword()));
                         return 1;
                     }
                     return 0;
-        })
-        .orElse(0);
+                })
+                .orElse(0);
     }
 
     @Override
-    public int logInPersonByUsername(String username, Person person) {
-        System.out.printf("Index", username, "person", person);
-        return selectPersonByUsername(username)
+    public int logInPersonByUsername(String username, String password, Person person) {
+        return selectPersonByUsername(username, password)
                 .map(p -> {
                     int indexOfPersonToLogIn = DB.indexOf(p);
-                    if(indexOfPersonToLogIn >=0){
-                        return 1;
+                    if (indexOfPersonToLogIn >= 0) {
+                        if (password.equals(person.getPassword())) {
+                            System.out.println("Password Correct!");
+                            return 1;
+                        } else {
+                            System.out.println("Password Incorrect!");
+                            return 0;
+                        }
                     }
                     return 0;
-                }).orElse(null);
+                }).orElse(0);
     }
 }
 

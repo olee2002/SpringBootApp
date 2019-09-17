@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import SignInPage from '../Components/SignInPage'
+import SignUpPage from '../Components/SignUpPage'
 import { api } from '../Data/data'
 
 
@@ -11,7 +12,8 @@ export default class Parent extends Component {
         password:'',
         loggedIn: false,
         users: {},
-        created: false
+        created: false,
+        signup: false
     }
 
     async componentDidMount(){
@@ -21,6 +23,8 @@ export default class Parent extends Component {
 
 
     handleChange = (event, key) => this.setState({[key]: event.target.value})
+
+    sendToSignUp = () => this.setState( {signup : true})
 
     handleSubmit = async () => {
         const {username, password} = this.state
@@ -40,10 +44,11 @@ export default class Parent extends Component {
         }
     }
 
-
     render() {
+        const { signup } = this.state
         return (
             <div className='app flex'>
+           {!signup ? 
                 <SignInPage
                 handleChange={this.handleChange} 
                 handleSubmit={this.handleSubmit}
@@ -52,7 +57,19 @@ export default class Parent extends Component {
                 password = {this.state.password}
                 loggedIn={this.state.loggedIn}
                 created={this.state.created}
-                />
+                sendToSignUp={this.sendToSignUp}
+                /> 
+                :
+                <SignUpPage
+                handleChange={this.handleChange} 
+                handleSubmit={this.handleSubmit}
+                handleLogIn={this.handleLogIn}
+                username = {this.state.username} 
+                password = {this.state.password}
+                loggedIn={this.state.loggedIn}
+                created={this.state.created}
+                /> 
+           }
             </div>
         )
     }

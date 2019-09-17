@@ -8,7 +8,7 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Route path='/' component={Parent}/>
+      <Route exact path='/' component={Parent}/>
     </Router>
   );
 }
