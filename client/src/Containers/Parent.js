@@ -32,6 +32,7 @@ export default class Parent extends Component {
 
     handleLogIn = async () => {
         const {username, password} = this.state
+        console.log('payload', {username, password})
         const response = await api.getUserByUsername({username, password})
         console.log('response', response)
         if(response && response.status===200){

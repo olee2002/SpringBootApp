@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @CrossOrigin(origins="*")
@@ -21,6 +22,11 @@ public class PersonController {
     public List<Person> addPerson(@RequestBody Person person){
         personService.insertPerson(person);
         return personService.getAllPeople();
+    }
+    @PostMapping(path = "/login")
+    public Optional<Person> getPersonByUsername(@RequestBody Person personToLogin){
+        System.out.printf(personToLogin.getUsername());
+        return personService.getPersonByUsername(personToLogin.getUsername());
     }
     @GetMapping(path = "{id}")
     public Person getPersonById(@PathVariable("id") UUID id){

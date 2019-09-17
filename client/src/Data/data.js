@@ -7,13 +7,14 @@ export const api = {
         return Axios.get(host)
     },
     getUserByUsername(user){
-        return Axios.put(host, user)
+        console.log('usr', user)
+        return Axios.post(`${host}/login`, user)
     },
     postAUser(user){
         return Axios.post(host, user)
     },
     updateAUser(user){
-        return Axios.put(host,user)
+        return Axios.put(host, user)
     },
     deleteAUser(userId){
         return Axios.delete(host, userId)

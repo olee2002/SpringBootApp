@@ -19,8 +19,10 @@ public interface PersonDao {
     List<Person> selectAllPeople();
 
     Optional<Person> selectPersonById(UUID id);
+    Optional<Person> selectPersonByUsername(String username);
 
     int deletePersonById(UUID id);
 
     int updatePersonById(UUID id, Person person);
+    int logInPersonByUsername(String username, Person person);
 }

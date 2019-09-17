@@ -19,7 +19,7 @@ public class Person {
         return id;
     }
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 

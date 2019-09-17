@@ -15,7 +15,7 @@ public class FakePersonDataAccess implements PersonDao {
 
     @Override
     public int insertPerson(UUID id, Person person) {
-        DB.add(new Person(id, person.getName(), password));
+        DB.add(new Person(id, person.getUsername(), person.getPassword()));
         return 1;
     }
 
@@ -31,6 +31,15 @@ public class FakePersonDataAccess implements PersonDao {
                 .filter(person->person.getId().equals(id))
                 .findFirst();
     }
+
+    @Override
+    public Optional<Person> selectPersonByUsername(String username) {
+        return DB
+                .stream()
+                .filter(person->person.getUsername().equals(username))
+                .findFirst();
+    }
+
 
     @Override
     public int deletePersonById(UUID id) {
@@ -50,11 +59,25 @@ public class FakePersonDataAccess implements PersonDao {
                     int indexOfPersonToUpdate = DB.indexOf(p);
                     System.out.printf("Index", indexOfPersonToUpdate);
                     if(indexOfPersonToUpdate >= 0){
-                        DB.set(indexOfPersonToUpdate, new Person(id, person.getName(), password));
+                        DB.set(indexOfPersonToUpdate, new Person(id, person.getUsername(), person.getPassword()));
                         return 1;
                     }
                     return 0;
         })
         .orElse(0);
     }
+
+    @Override
+    public int logInPersonByUsername(String username, Person person) {
+        System.out.printf("Index", username, "person", person);
+        return selectPersonByUsername(username)
+                .map(p -> {
+                    int indexOfPersonToLogIn = DB.indexOf(p);
+                    if(indexOfPersonToLogIn >=0){
+                        return 1;
+                    }
+                    return 0;
+                }).orElse(null);
+    }
 }
+

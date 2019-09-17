@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Child extends Component {
     render() {
 
-        const { handleChange, handleSubmit, handleLogIn, loggedIn, created } = this.props
+        const { handleChange, handleSubmit, handleLogIn, loggedIn, username } = this.props
 
         return (
             !loggedIn ?
@@ -38,7 +38,7 @@ export default class Child extends Component {
             <button 
             className='btn btn-primary m-3'
             onClick={()=>handleSubmit()}
-            >{!created ? "Sign-Up":"Created!"}</button>
+            >Sign-Up</button>
             <button 
             className='btn btn-primary m-3'
             onClick={()=>handleLogIn()}
@@ -46,7 +46,7 @@ export default class Child extends Component {
             </div>
             </div> 
             </>
-            : <div>Welcome back!</div>
+            : <div>Welcome back {username}!</div>
 
         )
     }
