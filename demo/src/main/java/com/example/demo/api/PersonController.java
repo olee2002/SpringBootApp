@@ -25,7 +25,6 @@ public class PersonController {
     @PostMapping(path = "/login")
     public int getPersonByUsername(@RequestBody Person personToLogin){
         System.out.printf(personToLogin.getUsername());
-        System.out.printf(personToLogin.getPassword());
         return personService.logInPersonByUsername(personToLogin.getUsername(), personToLogin.getPassword(), personToLogin);
     }
     @GetMapping(path = "{id}")

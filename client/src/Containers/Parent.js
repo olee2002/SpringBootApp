@@ -13,7 +13,8 @@ export default class Parent extends Component {
         loggedIn: false,
         users: {},
         created: false,
-        signup: false
+        signup: false,
+        err:''
     }
 
     async componentDidMount(){
@@ -22,7 +23,7 @@ export default class Parent extends Component {
     }
 
 
-    handleChange = (event, key) => this.setState({[key]: event.target.value})
+    handleChange = (event, key) => this.setState({[key]: event.target.value, err:''})
 
     sendToSignUp = () => this.setState( {signup : true})
 
@@ -39,13 +40,15 @@ export default class Parent extends Component {
         console.log('payload', {username, password})
         const response = await api.getUserByUsername({username, password})
         console.log('response', response)
-        if(response && response.status===200){
+        if(response && response.data===1){
             this.setState({loggedIn: true})
+        } else {
+            this.setState({err:"Incorrect Credentials!"})
         }
     }
 
     render() {
-        const { signup } = this.state
+        const { signup, err } = this.state
         return (
             <div className='app flex'>
            {!signup ? 
@@ -58,6 +61,7 @@ export default class Parent extends Component {
                 loggedIn={this.state.loggedIn}
                 created={this.state.created}
                 sendToSignUp={this.sendToSignUp}
+                err={err}
                 /> 
                 :
                 <SignUpPage
