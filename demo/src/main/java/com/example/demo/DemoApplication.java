@@ -4,11 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.awt.*;
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 @SpringBootApplication
 public class DemoApplication {
-	public static void main(String[] args) {
+	public static void main(String args[]) {
 
 		SpringApplication.run(DemoApplication.class, args);
 		System.out.println("Spring API is running successfully!");
@@ -22,9 +23,10 @@ public class DemoApplication {
 		Scanner input = new Scanner(System.in);
 
 		double principle = input.nextDouble();
+		String currencyFormat = NumberFormat.getCurrencyInstance().format(principle);
 		double monthly = input.nextDouble()/100/12;
 		double duration = input.nextDouble() * 12;
-		System.out.println("Principle: "+principle);
+		System.out.println("Principle: "+currencyFormat);
 		System.out.println("Interest: "+monthly);
 		System.out.println("Duration: "+duration);
 		double mortgage = principle * (monthly * Math.pow((1+monthly),duration))/(Math.pow((1+monthly),duration)-1);
