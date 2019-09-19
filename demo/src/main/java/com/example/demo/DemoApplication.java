@@ -20,6 +20,15 @@ public class DemoApplication {
 		System.out.println(point2);
 		System.out.println("**********");
 
+//		String[] fruits = {"Apple", "Mongo", "Orange"};
+
+		int numbers[] = {1,2,3,4};
+
+		for(int i=0; i<numbers.length; i++)
+			System.out.println(numbers[i]);
+
+		for(Integer num: numbers)
+			System.out.println(num);
 
 //		Scanner input = new Scanner(System.in);
 //
