@@ -18,6 +18,7 @@ public class FakePersonDataAccess implements PersonDao {
 
     @Override
     public List<Person> selectAllPeople() {
+//        System.out.println(Arrays.to);
         return DB;
     }
 
