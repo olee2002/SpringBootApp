@@ -14,10 +14,12 @@ Create an google cloud account with a $300 credit.
 - create a cluster ( run connect script in the console)
 - create a spanner instance
 
+setup gcloud
+
 ```
 gcloud init
 ```
-
+log in to the google cloud console
 ```
 gcloud auth login
 ```
@@ -25,15 +27,19 @@ if for some reason the above, try below,
 ```
 gcloud auth application-default login
 ```
+list the gcloud information
 ```
 gcloud components list
+gcloud config list
 ```
+set project id(this is your APPLICATION ID)
 ```
 gcloud config set project PROJECT_ID
 ```
-below can be copy and paste directly from the gcloud console
+connect your cluster to CLI
 ```
-gcloud container clusters get-credentials react-spring-app --zone us-central1-a --project react-spring-app-252019
+gcloud container clusters get-credentials "react-spring-app --zone us-central1-a --project react-spring-app-252019"
+" " information above should be your own. Go to the console and open cluster and click connect to get code above!
 ```
 
 now gcloud CLI is set up!
