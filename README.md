@@ -38,10 +38,9 @@ gcloud config set project PROJECT_ID
 ```
 connect your cluster to CLI
 ```
-gcloud container clusters get-credentials "react-spring-app --zone us-central1-a --project react-spring-app-252019"
-" " information above should be your own. Go to the console and open cluster and click connect to get code above!
+gcloud container clusters get-credentials "react-spring-app --zone us-central1-a --project app-name"
 ```
-
+" " information above should be your own. Go to the console and open cluster and click connect to get code above!
 now gcloud CLI is set up!
 
 ## Docker
