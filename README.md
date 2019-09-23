@@ -21,6 +21,7 @@ gcloud init
 ```
 gcloud auth login
 ```
+if for some reason the above, try below,
 ```
 gcloud auth application-default login
 ```
